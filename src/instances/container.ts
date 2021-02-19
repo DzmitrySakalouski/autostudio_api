@@ -1,6 +1,6 @@
 import { Container} from "inversify";
-import { IClientRepo } from "../repo/client.repo-type";
-import { ClientRepo } from "../repo/client.repo";
+import { IClientRepo } from "../repo";
+import { ClientRepo } from "../repo";
 
 const container = new Container();
 

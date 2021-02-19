@@ -23,7 +23,7 @@ export class Client extends Model<ClientModel, ClientCreationAttributes> {
 }
 
 export abstract class ClientModel {
-    public id?: number;
+    public id: number;
     public fullName: string;
     public car: string;
     public phoneNumber: string;

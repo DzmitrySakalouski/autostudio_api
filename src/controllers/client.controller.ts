@@ -1,7 +1,7 @@
 import { controller, httpGet, httpPost } from 'inversify-express-utils';
 import { Request, Response } from 'express';
 import {inject} from "inversify";
-import { IClientRepo } from '../repo/client.repo-type';
+import { IClientRepo } from '../repo';
 
 @controller("/api/clients")
 export class ClientController {

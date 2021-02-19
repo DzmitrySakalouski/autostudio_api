@@ -2,11 +2,11 @@ import 'reflect-metadata';
 
 import * as bodyParser from "body-parser";
 import container from "./instances/container";
-import {InversifyExpressServer, TYPE, interfaces} from "inversify-express-utils";
+import {InversifyExpressServer} from "inversify-express-utils";
 import {sequelize} from "./instances/sequelize";
 
 import "./controllers";
-import { Client } from './models/Client/client.model';
+import {Client} from './models';
 
 sequelize.authenticate().then(() => {
     console.log(`DATABASE CONNECTED\n`);

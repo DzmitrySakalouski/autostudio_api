@@ -1,4 +1,4 @@
-import {ClientModel, Client} from "../models/Client/client.model";
+import {ClientModel, Client} from "../../models";
 import {injectable} from "inversify";
 import {IClientRepo} from "./client.repo-type";
 
