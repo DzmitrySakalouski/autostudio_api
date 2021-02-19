@@ -2,6 +2,7 @@ import { controller, httpGet, httpPost } from 'inversify-express-utils';
 import { Request, Response } from 'express';
 import {inject} from "inversify";
 import { IClientRepo } from '../repo';
+import { ClientModel } from '../models';
 
 @controller("/api/clients")
 export class ClientController {
@@ -10,9 +11,11 @@ export class ClientController {
     ) {}
 
     @httpGet("/")
-    public getClients(request: Request, respose: Response): Promise<void> {
-        return new Promise((resolve, reject) => {
-            respose.json({message: "hello"});
+    public getClients(request: Request, respose: Response): Promise<ClientModel[]> {
+        return new Promise<ClientModel[]>((resolve, reject) => {
+            this.clientRepo.getAllClients().then(clients => {
+                respose.json(clients);
+            }).catch(error => respose.status(500).json({message: "Cannot get clients.", ...error}));
         });
     }
 
@@ -22,8 +25,8 @@ export class ClientController {
 
         return new Promise<void>(() => {
             this.clientRepo.createClient(oParams).then(result => {
-                respose.send(result);
-            }).catch(error => respose.send(error));
+                respose.json(result);
+            }).catch(error => respose.status(500).json({message: "Cannot create clients.", ...error}));
         });
     }
 }
