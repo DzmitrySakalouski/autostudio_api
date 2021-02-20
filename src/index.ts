@@ -23,17 +23,16 @@ server.setConfig(app => {
         extended: true,
     }));
     app.use(bodyParser.json());
+    app.use((req: any, res: any, next: any): void => {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+        res.header("Content-Type", "application/json; charset=utf-8");
+        next();
+    });
 });
 
 const app = server.build();
 
-const httpOptions = {
-    key: fs.readFileSync("server.key"),
-    cert: fs.readFileSync("server.cert"),
-};
-
-const httpsServer = https.createServer(httpOptions, app);
-
-httpsServer.listen(3001, () => {
+app.listen(3001, () => {
     console.log(`App is running`);
 });
