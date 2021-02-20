@@ -1,4 +1,4 @@
-import { controller, httpGet, httpPost } from 'inversify-express-utils';
+import { controller, httpDelete, httpGet, httpPost, queryParam, response } from 'inversify-express-utils';
 import { Request, Response } from 'express';
 import {inject} from "inversify";
 import { IClientRepo } from '../repo';
@@ -27,6 +27,22 @@ export class ClientController {
             this.clientRepo.createClient(oParams).then(result => {
                 respose.json(result);
             }).catch(error => respose.status(500).json({message: "Cannot create clients.", ...error}));
+        });
+    }
+
+    @httpDelete("/")
+    public deleteClient(@queryParam("clientId") clientId: number, @response() response: Response): Promise<void> {        
+        return new Promise<void>(() => {
+            this.clientRepo.deleteClient(Number(clientId)).then(deletedRecord => {
+                console.log("deletedRecord 1", deletedRecord);
+                console.log("deletedRecord 2", typeof deletedRecord);
+                
+                if (deletedRecord) {
+                    response.status(200).json({message: "Deleted successfully"});          
+                } else {
+                    response.status(404).json({message: "record not found"});
+                }
+            }).catch(error => response.status(500).json({...error}));
         });
     }
 }

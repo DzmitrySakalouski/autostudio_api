@@ -17,4 +17,12 @@ export class ClientRepo implements IClientRepo {
                 .catch(error => reject(error));
         });
     }
+
+    public deleteClient(clientId: number): Promise<any> {
+        return Client.destroy({
+            where: {
+                id: clientId,
+            }
+        });
+    }
 }
