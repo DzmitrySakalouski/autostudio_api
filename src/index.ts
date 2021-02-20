@@ -4,6 +4,8 @@ import * as bodyParser from "body-parser";
 import container from "./instances/container";
 import {InversifyExpressServer} from "inversify-express-utils";
 import {sequelize} from "./instances/sequelize";
+import * as  https from "https";
+import * as fs from "fs";
 
 import "./controllers";
 import {Client} from './models';
@@ -25,6 +27,13 @@ server.setConfig(app => {
 
 const app = server.build();
 
-app.listen(3001, () => {
+const httpOptions = {
+    key: fs.readFileSync("server.key"),
+    cert: fs.readFileSync("server.cert"),
+};
+
+const httpsServer = https.createServer(httpOptions, app);
+
+httpsServer.listen(3001, () => {
     console.log(`App is running`);
 });

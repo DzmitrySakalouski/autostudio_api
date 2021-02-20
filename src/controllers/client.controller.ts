@@ -14,7 +14,7 @@ export class ClientController {
     public getClients(request: Request, respose: Response): Promise<ClientModel[]> {
         return new Promise<ClientModel[]>((resolve, reject) => {
             this.clientRepo.getAllClients().then(clients => {
-                respose.json(clients);
+                respose.json({clients});
             }).catch(error => respose.status(500).json({message: "Cannot get clients.", ...error}));
         });
     }
