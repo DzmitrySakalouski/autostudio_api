@@ -1,4 +1,4 @@
-import { controller, httpDelete, httpGet, httpPost, queryParam, response } from 'inversify-express-utils';
+import { controller, httpDelete, httpGet, httpPost, httpPut, queryParam, response } from 'inversify-express-utils';
 import { Request, Response } from 'express';
 import {inject} from "inversify";
 import { IClientRepo } from '../repo';
@@ -40,9 +40,20 @@ export class ClientController {
                 if (deletedRecord) {
                     response.status(200).json({message: "Deleted successfully"});          
                 } else {
-                    response.status(404).json({message: "record not found"});
+                    response.status(404).json({message: "Record not found"});
                 }
             }).catch(error => response.status(500).json({...error}));
+        });
+    }
+
+    @httpPut("/")
+    public updateClient(@queryParam("clientId") clientId: number, @response() response: Response, request: Request): Promise<void> {
+        const oParams = request.body;
+        
+        return new Promise<void>(() => {
+            this.clientRepo.updateClient(clientId, oParams)
+                .then(result => response.json(result))
+                .catch(error => response.status(500).send({message: "Cannot update", ...error}));
         });
     }
 }
