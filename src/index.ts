@@ -4,16 +4,14 @@ import * as bodyParser from "body-parser";
 import container from "./instances/container";
 import {InversifyExpressServer} from "inversify-express-utils";
 import {sequelize} from "./instances/sequelize";
-import * as  https from "https";
-import * as fs from "fs";
 
 import "./controllers";
-import {Client} from './models';
+import {Client, Offer, Fee} from './models';
 
 sequelize.authenticate().then(() => {
     console.log(`DATABASE CONNECTED\n`);
 });
-sequelize.addModels([Client]);
+sequelize.addModels([Client, Offer, Fee]);
 sequelize.sync();
 
 const server = new InversifyExpressServer(container);

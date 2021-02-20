@@ -1,5 +1,6 @@
-import { Table, Column, Model, PrimaryKey, AutoIncrement } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, AutoIncrement, HasMany } from 'sequelize-typescript';
 import 'reflect-metadata';
+import { Offer } from '../Offer/offer.model';
 
 type ClientCreationAttributes = Omit<ClientModel, 'id'>;
 
@@ -20,6 +21,9 @@ export class Client extends Model<ClientModel, ClientCreationAttributes> {
 
     @Column
     public phoneNumber: string;
+
+    @HasMany(() => Offer)
+    public offers: Offer[];
 }
 
 export abstract class ClientModel {
