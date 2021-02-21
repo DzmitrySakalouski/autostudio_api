@@ -1,6 +1,7 @@
 import { Table, Column, Model, PrimaryKey, AutoIncrement, HasMany, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import 'reflect-metadata';
 import { Offer, OfferModel } from '../Offer/offer.model';
+import { Client } from '../Client';
 
 type FeeCreationAttributes = Omit<FeeModel, 'id'>;
 
@@ -19,6 +20,10 @@ export class Fee extends Model<FeeModel, FeeCreationAttributes> {
 
     @Column
     public price: number;
+
+    @ForeignKey(() => Client)
+    @Column
+    public clientId: number;
 
     @ForeignKey(() => Offer)
     @Column

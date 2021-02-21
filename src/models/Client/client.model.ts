@@ -7,7 +7,7 @@ type ClientCreationAttributes = Omit<ClientModel, 'id'>;
 @Table({
     timestamps: true,
 })
-export class Client extends Model<ClientModel, ClientCreationAttributes> {
+export class Client extends Model {
     @PrimaryKey
     @AutoIncrement
     @Column
@@ -24,6 +24,8 @@ export class Client extends Model<ClientModel, ClientCreationAttributes> {
 
     @HasMany(() => Offer)
     public offers: Offer[];
+
+    public offerCount: number;
 }
 
 export abstract class ClientModel {
@@ -31,4 +33,5 @@ export abstract class ClientModel {
     public fullName: string;
     public car: string;
     public phoneNumber: string;
+    public offerCount: number;
 }

@@ -1,13 +1,29 @@
-import {ClientModel, Client} from "../../models";
+import {ClientModel, Client, Offer} from "../../models";
 import {injectable} from "inversify";
 import {IClientRepo} from "./client.repo-type";
 import { error } from "console";
+import { Sequelize } from "sequelize";
 
 @injectable()
 export class ClientRepo implements IClientRepo {
     public getAllClients(): Promise<ClientModel[]> {
         return new Promise<ClientModel[]>((resolve, reject) => {
-            Client.findAll().then(clients => resolve(clients)).catch(error => reject(error));
+            Client.findAll({
+                attributes: [
+                    "id", 
+                    "fullName", 
+                    "car", 
+                    "phoneNumber", 
+                    [Sequelize.fn('count', Sequelize.col('comment')), 'offerCount']],
+                include: [{
+                    model: Offer, attributes: []
+                }],
+                group: ['Client.id']
+            }).then(clients => {
+                resolve(clients);
+            }).catch(error => {
+                reject(error);
+            });
         });
     }
 

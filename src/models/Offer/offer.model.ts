@@ -8,7 +8,7 @@ type OfferCreationAttributes = Omit<OfferModel, 'id'>;
 @Table({
     timestamps: true
 })
-export class Offer extends Model<OfferModel, OfferCreationAttributes> {
+export class Offer extends Model {
     @PrimaryKey
     @AutoIncrement
     @Column
@@ -32,4 +32,5 @@ export abstract class OfferModel {
     public id: number;
     public comment: string;
     public clientId: number;
+    public fees: Fee[];
 }
