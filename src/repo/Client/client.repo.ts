@@ -13,7 +13,8 @@ export class ClientRepo implements IClientRepo {
                     "id", 
                     "fullName", 
                     "car", 
-                    "phoneNumber", 
+                    "phoneNumber",
+                    "createdAt",
                     [Sequelize.fn('count', Sequelize.col('comment')), 'offerCount']],
                 include: [{
                     model: Offer, attributes: []

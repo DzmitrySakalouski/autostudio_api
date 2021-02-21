@@ -9,7 +9,7 @@ type FeeCreationAttributes = Omit<FeeModel, 'id'>;
 @Table({
     timestamps: true
 })
-export class Fee extends Model<FeeModel, FeeCreationAttributes> {
+export class Fee extends Model {
     @PrimaryKey
     @AutoIncrement
     @Column

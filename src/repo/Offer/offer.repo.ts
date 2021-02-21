@@ -1,12 +1,27 @@
-import {Offer, OfferModel} from "../../models";
+import {Fee, Offer, OfferModel} from "../../models";
 import "sequelize/types";
+import { Sequelize } from "sequelize";
 
 export class OfferRepo {
     public getOffersByClientId(clientOwnerId: number): Promise<OfferModel[]> {
         return new Promise<OfferModel[]>((resolve, reject) => {
-            Offer.findAll({where: {
-                clientId: clientOwnerId,
-            }}).then(result => resolve(result)).catch(error => reject(error));
+            Offer.findAll(
+                {
+                    where: {
+                        clientId: clientOwnerId
+                    },
+                    attributes: [
+                        "id",
+                        "createdAt",
+                        "comment",
+                        "createdAt",
+                        [Sequelize.fn('sum', Sequelize.col('price')), 'feeAmount'],
+                    ],
+                    include: [{
+                        model: Fee,
+                    }],
+                    group: ['Offer.id']
+                }).then(result => resolve(result)).catch(error => reject(error));
         });
     }
 
