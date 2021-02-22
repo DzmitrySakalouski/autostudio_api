@@ -15,7 +15,7 @@ export class OfferRepo {
                         "createdAt",
                         "comment",
                         "createdAt",
-                        [Sequelize.fn('sum', Sequelize.col('price')), 'feeAmount'],
+                        [Sequelize.fn('sum', Sequelize.col('price')), 'totalFeeAmount'],
                     ],
                     include: [{
                         model: Fee,

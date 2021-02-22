@@ -26,8 +26,6 @@ export class Offer extends Model {
 
     @HasMany(() => Fee)
     public fees: Fee[];
-
-    public feeAmount: number;
 }
 
 export abstract class OfferModel {
@@ -35,5 +33,4 @@ export abstract class OfferModel {
     public comment: string;
     public clientId: number;
     public fees: Fee[];
-    public feeAmount: number;
 }

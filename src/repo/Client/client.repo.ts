@@ -1,4 +1,4 @@
-import {ClientModel, Client, Offer} from "../../models";
+import {ClientModel, Client, Offer, Fee} from "../../models";
 import {injectable} from "inversify";
 import {IClientRepo} from "./client.repo-type";
 import { error } from "console";
@@ -15,14 +15,22 @@ export class ClientRepo implements IClientRepo {
                     "car", 
                     "phoneNumber",
                     "createdAt",
-                    [Sequelize.fn('count', Sequelize.col('comment')), 'offerCount']],
+                    [Sequelize.fn('count', Sequelize.col('comment')), 'offerCount'],
+                    [Sequelize.fn('sum', Sequelize.col('price')), 'totalFeeAmount']],
                 include: [{
-                    model: Offer, attributes: []
+                    model: Offer, 
+                    attributes: [],
+                    include: [{
+                        model: Fee,
+                        attributes: [],
+                    }]
                 }],
                 group: ['Client.id']
             }).then(clients => {
                 resolve(clients);
             }).catch(error => {
+                console.log(error);
+                
                 reject(error);
             });
         });

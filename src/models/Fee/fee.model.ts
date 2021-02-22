@@ -21,10 +21,6 @@ export class Fee extends Model {
     @Column
     public price: number;
 
-    @ForeignKey(() => Client)
-    @Column
-    public clientId: number;
-
     @ForeignKey(() => Offer)
     @Column
     public orderId: number;
