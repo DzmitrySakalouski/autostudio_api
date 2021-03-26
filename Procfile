@@ -1,1 +1,1 @@
-web: npm start
+web: node ./dist/autostudio_api.app.bundle.js
