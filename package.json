@@ -7,11 +7,11 @@
     "prebuild": "npm run lint",
     "build": "webpack --config webpack.config.js --env=dev --mode development",
     "prestart": "npm run build",
-    "start-dev": "node ./dist/autostudio_api.app.bundle.js",
+    "start": "node ./dist/autostudio_api.app.bundle.js",
     "preprod": "npm test",
     "prod": "webpack --config webpack.config.js --env=prod --mode production",
     "prestart-prod": "npm run prod",
-    "start": "node ./build/autostudio_api.app.bundle.min.js",
+    "start-prod": "node ./build/autostudio_api.app.bundle.min.js",
     "test": "jest --config jest.config.json --forceExit",
     "lint": "npm run tslint \"src/**/*.ts\"",
     "tslint": "tslint"
@@ -37,7 +37,9 @@
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^5.23.0",
     "webpack-merge": "^5.7.3",
-    "webpack-node-externals": "^2.5.2",
+    "webpack-node-externals": "^2.5.2"
+  },
+  "devDependencies": {
     "@types/express": "^4.17.11",
     "@types/node": "^14.14.29",
     "@types/validator": "^13.1.3",
