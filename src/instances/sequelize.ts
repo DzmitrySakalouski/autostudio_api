@@ -3,6 +3,9 @@ import { Sequelize } from 'sequelize-typescript';
 export const sequelize = new Sequelize(process.env.DATABASE_URL, {
   database: 'autostudiodb',
   dialect: 'postgres',
+  dialectOptions: {
+    ssl: true,
+  },
   pool: {
     max: 5,
     min: 0,
