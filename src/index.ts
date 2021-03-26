@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 
-import * as bodyParser from "body-parser";
+const bodyParser = require('body-parser');
 import container from "./instances/container";
 import {InversifyExpressServer} from "inversify-express-utils";
 import {sequelize} from "./instances/sequelize";
@@ -31,6 +31,6 @@ server.setConfig(app => {
 
 const app = server.build();
 
-app.listen(3001, () => {
+app.listen(3001, () => {    
     console.log(`App is running`);
 });

@@ -23,6 +23,12 @@ export class ClientController {
     public createClient(request: Request, respose: Response): Promise<void> {
         const oParams = request.body;
 
+        console.log("\n");
+        console.log(request);
+        console.log("\n");
+        
+        
+
         return new Promise<void>(() => {
             this.clientRepo.createClient(oParams).then(result => {
                 respose.json(result);
