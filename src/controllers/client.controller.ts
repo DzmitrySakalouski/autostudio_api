@@ -23,12 +23,6 @@ export class ClientController {
     public createClient(request: Request, respose: Response): Promise<void> {
         const oParams = request.body;
 
-        console.log("\n");
-        console.log(request);
-        console.log("\n");
-        
-        
-
         return new Promise<void>(() => {
             this.clientRepo.createClient(oParams).then(result => {
                 respose.json(result);
@@ -44,9 +38,9 @@ export class ClientController {
                 console.log("deletedRecord 2", typeof deletedRecord);
                 
                 if (deletedRecord) {
-                    response.status(200).json({message: "Deleted successfully"});          
+                    response.status(200).json("Deleted successfully");          
                 } else {
-                    response.status(404).json({message: "Record not found"});
+                    response.status(404).json("Record not found");
                 }
             }).catch(error => response.status(500).json({...error}));
         });
