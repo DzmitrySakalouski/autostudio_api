@@ -8,7 +8,7 @@ import {sequelize} from "./instances/sequelize";
 import "./controllers";
 import {Client, Offer, Fee} from './models';
 
-const port = process.env.PORT || 3001
+const port = process.env.PORT || 3001;
 
 sequelize.authenticate().then(() => {
     console.log(`DATABASE CONNECTED\n`);
