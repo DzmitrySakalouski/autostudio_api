@@ -7,11 +7,11 @@
     "prebuild": "npm run lint",
     "build": "webpack --config webpack.config.js --env=dev --mode development",
     "prestart": "npm run build",
-    "start": "node ./dist/autostudio_api.app.bundle.js",
+    "start-dev": "node ./dist/autostudio_api.app.bundle.js",
     "preprod": "npm test",
     "prod": "webpack --config webpack.config.js --env=prod --mode production",
     "prestart-prod": "npm run prod",
-    "start-prod": "node ./build/autostudio_api.app.bundle.min.js",
+    "start": "node ./build/autostudio_api.app.bundle.min.js",
     "test": "jest --config jest.config.json --forceExit",
     "lint": "npm run tslint \"src/**/*.ts\"",
     "tslint": "tslint"
