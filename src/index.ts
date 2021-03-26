@@ -8,6 +8,8 @@ import {sequelize} from "./instances/sequelize";
 import "./controllers";
 import {Client, Offer, Fee} from './models';
 
+const port = process.env.PORT || 3001
+
 sequelize.authenticate().then(() => {
     console.log(`DATABASE CONNECTED\n`);
 });
@@ -31,6 +33,10 @@ server.setConfig(app => {
 
 const app = server.build();
 
-app.listen(3001, () => {    
+app.get("/", (req, resp) => {
+    resp.json({message: "App is running"});
+});
+
+app.listen(port, () => {    
     console.log(`App is running`);
 });
